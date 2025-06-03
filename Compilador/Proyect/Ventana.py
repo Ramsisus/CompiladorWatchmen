@@ -234,7 +234,7 @@ class Compilador(Tk):
 
     def update_line_numbers(self, event=None):
         # Accede a lista_errores_lexicos a través de una instancia de Compilador
-        error_line = AL.lista_erorres_lexicos
+        error_line = AL.lista_errores_lexicos
         # Actualiza los números de línea en función del número de líneas en el editor
         lines = self.text_editor.get(1.0, "end-1c").count("\n")
         #AL.contador = self.text_editor.get(1.0, "end-1c").count("\n")+1

@@ -1,10 +1,6 @@
 #Importar modulo yacc
 import ply.yacc as yacc
-from AnalizadorLexico import lexer
 from AnalizadorLexico import tokens
-
-from graphviz import Source #libreria (graphviz) para generar la imagen del arbol
-from PIL import Image #libreria (pillow) para abrir imagen
 
 errores_Sinc_Desc = []
 
@@ -85,7 +81,7 @@ def p_expresion_valores(p):
     """ 
     expresion : PARENTESIS_A expresion PARENTESIS_B
               | NUMERO
-              | REAL
+              | REAL_LIT
               | CADENA
               | TRUE
               | FALSE
@@ -143,37 +139,53 @@ def p_for_actualizacion(p):
 # Comandos del lenguaje del robot
 
 def p_comando_movimiento(p):
-    """ lista_declaraciones : MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA """
+    """ declaracion : MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA """
     p[0] = ('MOVE_TO', (p[3], p[5]))
 
+def p_comando_movimiento_error(p):
+    """ declaracion : MOVE_TO PARENTESIS_A NUMERO COMA PARENTESIS_B PUNTOCOMA
+                    | MOVE_TO PARENTESIS_A COMA NUMERO PARENTESIS_B PUNTOCOMA  
+    """
+    errores_Sinc_Desc.append(f"Falta un parametro en la instruccion MOVE_TO en la linea {p.lineno(1)}")
+
+    
+
 def p_comando_espera(p):
-    """ lista_declaraciones : WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA """
+    """ declaracion : WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA """
     p[0] = ('WAIT_MOTION',)
+
+def p_comando_espera_error(p):
+    """ declaracion : WAIT_MOTION PUNTOCOMA """
+    errores_Sinc_Desc.append(f"Faltan los parentesis en WAIT_MOTION en la linea {p.lineno(1)}")
 
 def p_comando_grabacion(p):
     """
-    lista_declaraciones : START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
+    declaracion : START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
                         | STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
     """
     p[0] = (p[1],)
 
 def p_comando_luz(p):
     """
-    lista_declaraciones : LIGHT_ON PUNTOCOMA
+    declaracion : LIGHT_ON PUNTOCOMA
                         | LIGHT_OFF PUNTOCOMA
     """
     p[0] = (p[1],)
 
 def p_comando_alarma(p):
     """
-    lista_declaraciones : ALARM_ON PUNTOCOMA
+    declaracion : ALARM_ON PUNTOCOMA
                         | ALARM_OFF PUNTOCOMA
     """
     p[0] = (p[1],)
 
 def p_comando_stop(p):
-    """ lista_declaraciones : STOP PUNTOCOMA """
+    """ declaracion : STOP PUNTOCOMA """
     p[0] = ('STOP',)
+
+def p_error_comando_stop(p):
+    """ declaracion : STOP """
+    errores_Sinc_Desc.append(f"Falta punto y coma en la sentencia STOP, linea {p.lineno(1)}")
 
 def p_error(p):
     if p:
@@ -183,44 +195,6 @@ def p_error(p):
 
 # Construir analizador
 parser = yacc.yacc()
-
-def arbol (codigo):
-    syntax_tree = parser.parse(codigo, lexer=lexer) #aqui se genera el arbol
-    #obtiene el codigo de la imagen del arbol a partir del arbol sintáctico
-    graphviz_code = tree_to_graphviz(syntax_tree)
-    print(graphviz_code) #imprime
-    graph = Source(graphviz_code)#se prepara el codigo de la imagen del arbol
-    graph.render('arbol', format='png', cleanup=True) #se crea el archivo arbol.png
-
-#Cambiar estas dos lineas para desplegarlo con un boton
-    image = Image.open('arbol.png') #se busca la imagen
-    image.show()#se muestra la imagen
-
-def tree_to_graphviz(tree, graph_str=None, parent_id=None, node_counter=[0]):
-    if graph_str is None:
-        graph_str = "digraph G {\n"
-    
-    current_id = f"node{node_counter[0]}"
-    node_counter[0] += 1
-
-    # Nodo actual
-    if isinstance(tree, tuple):
-        op, *children = tree
-        graph_str += f'    {current_id} [label="{op}"];\n'
-        
-        # Recorrer hijos
-        for child in children:
-            child_id, graph_str = tree_to_graphviz(child, graph_str, current_id, node_counter)
-            graph_str += f'    {current_id} -> {child_id};\n'
-    else:
-        # Hoja
-        graph_str += f'    {current_id} [label="{tree}"];\n'
-    
-    if parent_id is None:
-        graph_str += "}"
-    
-    return (current_id, graph_str) if parent_id is not None else graph_str
-
 
 # Función de prueba
 def test_parser(codigo):
@@ -246,4 +220,3 @@ BEGIN {
 """
 test_parser(codigo)
 print(errores_Sinc_Desc)
-arbol(codigo)
