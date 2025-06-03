@@ -1,0 +1,2342 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    COMILLADOBLE
+    COMILLASIMPLE
+    CORCHETE_A
+    CORCHETE_B
+    FROM
+    FUN
+    IMPORT
+    NOT
+    OR
+    PUNTO
+    REAL_LIT
+    RETURN
+    SENSOR_PIR
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> BEGIN bloque_codigo END
+Rule 2     bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C
+Rule 3     lista_declaraciones -> lista_declaraciones declaracion
+Rule 4     lista_declaraciones -> lista_declaraciones si
+Rule 5     lista_declaraciones -> lista_declaraciones mientras
+Rule 6     lista_declaraciones -> lista_declaraciones for_loop
+Rule 7     lista_declaraciones -> declaracion
+Rule 8     lista_declaraciones -> si
+Rule 9     lista_declaraciones -> mientras
+Rule 10    lista_declaraciones -> for_loop
+Rule 11    declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA
+Rule 12    declaracion -> tipo ID ASIGNACION expresion
+Rule 13    declaracion -> tipo ID ASIGNACION PUNTOCOMA
+Rule 14    tipo -> INT
+Rule 15    tipo -> BOOL
+Rule 16    tipo -> STG
+Rule 17    tipo -> REAL
+Rule 18    expresion -> expresion SUMA expresion
+Rule 19    expresion -> expresion RESTA expresion
+Rule 20    expresion -> expresion MULTIPLICACION expresion
+Rule 21    expresion -> expresion DIVISION expresion
+Rule 22    expresion -> expresion MENORQUE expresion
+Rule 23    expresion -> expresion MENORIGUAL expresion
+Rule 24    expresion -> expresion MAYORQUE expresion
+Rule 25    expresion -> expresion MAYORIGUAL expresion
+Rule 26    expresion -> expresion IGUAL expresion
+Rule 27    expresion -> expresion DIFERENTE expresion
+Rule 28    expresion -> PARENTESIS_A expresion PARENTESIS_B
+Rule 29    expresion -> NUMERO
+Rule 30    expresion -> REAL
+Rule 31    expresion -> CADENA
+Rule 32    expresion -> TRUE
+Rule 33    expresion -> FALSE
+Rule 34    si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo
+Rule 35    si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo
+Rule 36    mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo
+Rule 37    for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
+Rule 38    for_init -> tipo ID ASIGNACION expresion
+Rule 39    for_init -> ID ASIGNACION expresion
+Rule 40    for_condicion -> expresion
+Rule 41    for_actualizacion -> ID ASIGNACION expresion
+Rule 42    for_actualizacion -> ID MASMAS
+Rule 43    for_actualizacion -> ID MENOSMENOS
+Rule 44    lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA
+Rule 45    lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA
+Rule 46    lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
+Rule 47    lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
+Rule 48    lista_declaraciones -> LIGHT_ON PUNTOCOMA
+Rule 49    lista_declaraciones -> LIGHT_OFF PUNTOCOMA
+Rule 50    lista_declaraciones -> ALARM_ON PUNTOCOMA
+Rule 51    lista_declaraciones -> ALARM_OFF PUNTOCOMA
+Rule 52    lista_declaraciones -> STOP PUNTOCOMA
+
+Terminals, with rules where they appear
+
+ALARM_OFF            : 51
+ALARM_ON             : 50
+AND                  : 
+ASIGNACION           : 11 12 13 38 39 41
+BEGIN                : 1
+BOOL                 : 15
+CADENA               : 31
+COMA                 : 44
+COMILLADOBLE         : 
+COMILLASIMPLE        : 
+CORCHETE_A           : 
+CORCHETE_B           : 
+DIFERENTE            : 27
+DIVISION             : 21
+ELSE                 : 35
+END                  : 1
+FALSE                : 33
+FOR                  : 37
+FROM                 : 
+FUN                  : 
+ID                   : 11 12 13 38 39 41 42 43
+IF                   : 34 35
+IGUAL                : 26
+IMPORT               : 
+INT                  : 14
+LIGHT_OFF            : 49
+LIGHT_ON             : 48
+LLAVE_A              : 2
+LLAVE_C              : 2
+MASMAS               : 42
+MAYORIGUAL           : 25
+MAYORQUE             : 24
+MENORIGUAL           : 23
+MENORQUE             : 22
+MENOSMENOS           : 43
+MOVE_TO              : 44
+MULTIPLICACION       : 20
+NOT                  : 
+NUMERO               : 29 44 44
+OR                   : 
+PARENTESIS_A         : 28 34 35 36 37 44 45 46 47
+PARENTESIS_B         : 28 34 35 36 37 44 45 46 47
+PUNTO                : 
+PUNTOCOMA            : 11 13 37 37 44 45 46 47 48 49 50 51 52
+REAL                 : 17 30
+REAL_LIT             : 
+RESTA                : 19
+RETURN               : 
+SENSOR_PIR           : 
+START_RECORD         : 46
+STG                  : 16
+STOP                 : 52
+STOP_RECORD          : 47
+SUMA                 : 18
+TRUE                 : 32
+WAIT_MOTION          : 45
+WHILE                : 36
+error                : 
+
+Nonterminals, with rules where they appear
+
+bloque_codigo        : 1 34 35 35 36 37
+declaracion          : 3 7
+expresion            : 11 12 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 34 35 36 38 39 40 41
+for_actualizacion    : 37
+for_condicion        : 37
+for_init             : 37
+for_loop             : 6 10
+lista_declaraciones  : 2 3 4 5 6
+mientras             : 5 9
+programa             : 0
+si                   : 4 8
+tipo                 : 11 12 13 38
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . BEGIN bloque_codigo END
+
+    BEGIN           shift and go to state 2
+
+    programa                       shift and go to state 1
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> BEGIN . bloque_codigo END
+    (2) bloque_codigo -> . LLAVE_A lista_declaraciones LLAVE_C
+
+    LLAVE_A         shift and go to state 4
+
+    bloque_codigo                  shift and go to state 3
+
+state 3
+
+    (1) programa -> BEGIN bloque_codigo . END
+
+    END             shift and go to state 5
+
+
+state 4
+
+    (2) bloque_codigo -> LLAVE_A . lista_declaraciones LLAVE_C
+    (3) lista_declaraciones -> . lista_declaraciones declaracion
+    (4) lista_declaraciones -> . lista_declaraciones si
+    (5) lista_declaraciones -> . lista_declaraciones mientras
+    (6) lista_declaraciones -> . lista_declaraciones for_loop
+    (7) lista_declaraciones -> . declaracion
+    (8) lista_declaraciones -> . si
+    (9) lista_declaraciones -> . mientras
+    (10) lista_declaraciones -> . for_loop
+    (44) lista_declaraciones -> . MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA
+    (45) lista_declaraciones -> . WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA
+    (46) lista_declaraciones -> . START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
+    (47) lista_declaraciones -> . STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
+    (48) lista_declaraciones -> . LIGHT_ON PUNTOCOMA
+    (49) lista_declaraciones -> . LIGHT_OFF PUNTOCOMA
+    (50) lista_declaraciones -> . ALARM_ON PUNTOCOMA
+    (51) lista_declaraciones -> . ALARM_OFF PUNTOCOMA
+    (52) lista_declaraciones -> . STOP PUNTOCOMA
+    (11) declaracion -> . tipo ID ASIGNACION expresion PUNTOCOMA
+    (12) declaracion -> . tipo ID ASIGNACION expresion
+    (13) declaracion -> . tipo ID ASIGNACION PUNTOCOMA
+    (34) si -> . IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo
+    (35) si -> . IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo
+    (36) mientras -> . WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo
+    (37) for_loop -> . FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
+    (14) tipo -> . INT
+    (15) tipo -> . BOOL
+    (16) tipo -> . STG
+    (17) tipo -> . REAL
+
+    MOVE_TO         shift and go to state 11
+    WAIT_MOTION     shift and go to state 12
+    START_RECORD    shift and go to state 13
+    STOP_RECORD     shift and go to state 14
+    LIGHT_ON        shift and go to state 15
+    LIGHT_OFF       shift and go to state 16
+    ALARM_ON        shift and go to state 17
+    ALARM_OFF       shift and go to state 18
+    STOP            shift and go to state 19
+    IF              shift and go to state 21
+    WHILE           shift and go to state 22
+    FOR             shift and go to state 23
+    INT             shift and go to state 24
+    BOOL            shift and go to state 25
+    STG             shift and go to state 26
+    REAL            shift and go to state 27
+
+    lista_declaraciones            shift and go to state 6
+    declaracion                    shift and go to state 7
+    si                             shift and go to state 8
+    mientras                       shift and go to state 9
+    for_loop                       shift and go to state 10
+    tipo                           shift and go to state 20
+
+state 5
+
+    (1) programa -> BEGIN bloque_codigo END .
+
+    $end            reduce using rule 1 (programa -> BEGIN bloque_codigo END .)
+
+
+state 6
+
+    (2) bloque_codigo -> LLAVE_A lista_declaraciones . LLAVE_C
+    (3) lista_declaraciones -> lista_declaraciones . declaracion
+    (4) lista_declaraciones -> lista_declaraciones . si
+    (5) lista_declaraciones -> lista_declaraciones . mientras
+    (6) lista_declaraciones -> lista_declaraciones . for_loop
+    (11) declaracion -> . tipo ID ASIGNACION expresion PUNTOCOMA
+    (12) declaracion -> . tipo ID ASIGNACION expresion
+    (13) declaracion -> . tipo ID ASIGNACION PUNTOCOMA
+    (34) si -> . IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo
+    (35) si -> . IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo
+    (36) mientras -> . WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo
+    (37) for_loop -> . FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
+    (14) tipo -> . INT
+    (15) tipo -> . BOOL
+    (16) tipo -> . STG
+    (17) tipo -> . REAL
+
+    LLAVE_C         shift and go to state 28
+    IF              shift and go to state 21
+    WHILE           shift and go to state 22
+    FOR             shift and go to state 23
+    INT             shift and go to state 24
+    BOOL            shift and go to state 25
+    STG             shift and go to state 26
+    REAL            shift and go to state 27
+
+    declaracion                    shift and go to state 29
+    si                             shift and go to state 30
+    mientras                       shift and go to state 31
+    for_loop                       shift and go to state 32
+    tipo                           shift and go to state 20
+
+state 7
+
+    (7) lista_declaraciones -> declaracion .
+
+    LLAVE_C         reduce using rule 7 (lista_declaraciones -> declaracion .)
+    IF              reduce using rule 7 (lista_declaraciones -> declaracion .)
+    WHILE           reduce using rule 7 (lista_declaraciones -> declaracion .)
+    FOR             reduce using rule 7 (lista_declaraciones -> declaracion .)
+    INT             reduce using rule 7 (lista_declaraciones -> declaracion .)
+    BOOL            reduce using rule 7 (lista_declaraciones -> declaracion .)
+    STG             reduce using rule 7 (lista_declaraciones -> declaracion .)
+    REAL            reduce using rule 7 (lista_declaraciones -> declaracion .)
+
+
+state 8
+
+    (8) lista_declaraciones -> si .
+
+    LLAVE_C         reduce using rule 8 (lista_declaraciones -> si .)
+    IF              reduce using rule 8 (lista_declaraciones -> si .)
+    WHILE           reduce using rule 8 (lista_declaraciones -> si .)
+    FOR             reduce using rule 8 (lista_declaraciones -> si .)
+    INT             reduce using rule 8 (lista_declaraciones -> si .)
+    BOOL            reduce using rule 8 (lista_declaraciones -> si .)
+    STG             reduce using rule 8 (lista_declaraciones -> si .)
+    REAL            reduce using rule 8 (lista_declaraciones -> si .)
+
+
+state 9
+
+    (9) lista_declaraciones -> mientras .
+
+    LLAVE_C         reduce using rule 9 (lista_declaraciones -> mientras .)
+    IF              reduce using rule 9 (lista_declaraciones -> mientras .)
+    WHILE           reduce using rule 9 (lista_declaraciones -> mientras .)
+    FOR             reduce using rule 9 (lista_declaraciones -> mientras .)
+    INT             reduce using rule 9 (lista_declaraciones -> mientras .)
+    BOOL            reduce using rule 9 (lista_declaraciones -> mientras .)
+    STG             reduce using rule 9 (lista_declaraciones -> mientras .)
+    REAL            reduce using rule 9 (lista_declaraciones -> mientras .)
+
+
+state 10
+
+    (10) lista_declaraciones -> for_loop .
+
+    LLAVE_C         reduce using rule 10 (lista_declaraciones -> for_loop .)
+    IF              reduce using rule 10 (lista_declaraciones -> for_loop .)
+    WHILE           reduce using rule 10 (lista_declaraciones -> for_loop .)
+    FOR             reduce using rule 10 (lista_declaraciones -> for_loop .)
+    INT             reduce using rule 10 (lista_declaraciones -> for_loop .)
+    BOOL            reduce using rule 10 (lista_declaraciones -> for_loop .)
+    STG             reduce using rule 10 (lista_declaraciones -> for_loop .)
+    REAL            reduce using rule 10 (lista_declaraciones -> for_loop .)
+
+
+state 11
+
+    (44) lista_declaraciones -> MOVE_TO . PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA
+
+    PARENTESIS_A    shift and go to state 33
+
+
+state 12
+
+    (45) lista_declaraciones -> WAIT_MOTION . PARENTESIS_A PARENTESIS_B PUNTOCOMA
+
+    PARENTESIS_A    shift and go to state 34
+
+
+state 13
+
+    (46) lista_declaraciones -> START_RECORD . PARENTESIS_A PARENTESIS_B PUNTOCOMA
+
+    PARENTESIS_A    shift and go to state 35
+
+
+state 14
+
+    (47) lista_declaraciones -> STOP_RECORD . PARENTESIS_A PARENTESIS_B PUNTOCOMA
+
+    PARENTESIS_A    shift and go to state 36
+
+
+state 15
+
+    (48) lista_declaraciones -> LIGHT_ON . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 37
+
+
+state 16
+
+    (49) lista_declaraciones -> LIGHT_OFF . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 38
+
+
+state 17
+
+    (50) lista_declaraciones -> ALARM_ON . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 39
+
+
+state 18
+
+    (51) lista_declaraciones -> ALARM_OFF . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 40
+
+
+state 19
+
+    (52) lista_declaraciones -> STOP . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 41
+
+
+state 20
+
+    (11) declaracion -> tipo . ID ASIGNACION expresion PUNTOCOMA
+    (12) declaracion -> tipo . ID ASIGNACION expresion
+    (13) declaracion -> tipo . ID ASIGNACION PUNTOCOMA
+
+    ID              shift and go to state 42
+
+
+state 21
+
+    (34) si -> IF . PARENTESIS_A expresion PARENTESIS_B bloque_codigo
+    (35) si -> IF . PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo
+
+    PARENTESIS_A    shift and go to state 43
+
+
+state 22
+
+    (36) mientras -> WHILE . PARENTESIS_A expresion PARENTESIS_B bloque_codigo
+
+    PARENTESIS_A    shift and go to state 44
+
+
+state 23
+
+    (37) for_loop -> FOR . PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
+
+    PARENTESIS_A    shift and go to state 45
+
+
+state 24
+
+    (14) tipo -> INT .
+
+    ID              reduce using rule 14 (tipo -> INT .)
+
+
+state 25
+
+    (15) tipo -> BOOL .
+
+    ID              reduce using rule 15 (tipo -> BOOL .)
+
+
+state 26
+
+    (16) tipo -> STG .
+
+    ID              reduce using rule 16 (tipo -> STG .)
+
+
+state 27
+
+    (17) tipo -> REAL .
+
+    ID              reduce using rule 17 (tipo -> REAL .)
+
+
+state 28
+
+    (2) bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .
+
+    END             reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    ELSE            reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    LLAVE_C         reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    IF              reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    WHILE           reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    FOR             reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    INT             reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    BOOL            reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    STG             reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+    REAL            reduce using rule 2 (bloque_codigo -> LLAVE_A lista_declaraciones LLAVE_C .)
+
+
+state 29
+
+    (3) lista_declaraciones -> lista_declaraciones declaracion .
+
+    LLAVE_C         reduce using rule 3 (lista_declaraciones -> lista_declaraciones declaracion .)
+    IF              reduce using rule 3 (lista_declaraciones -> lista_declaraciones declaracion .)
+    WHILE           reduce using rule 3 (lista_declaraciones -> lista_declaraciones declaracion .)
+    FOR             reduce using rule 3 (lista_declaraciones -> lista_declaraciones declaracion .)
+    INT             reduce using rule 3 (lista_declaraciones -> lista_declaraciones declaracion .)
+    BOOL            reduce using rule 3 (lista_declaraciones -> lista_declaraciones declaracion .)
+    STG             reduce using rule 3 (lista_declaraciones -> lista_declaraciones declaracion .)
+    REAL            reduce using rule 3 (lista_declaraciones -> lista_declaraciones declaracion .)
+
+
+state 30
+
+    (4) lista_declaraciones -> lista_declaraciones si .
+
+    LLAVE_C         reduce using rule 4 (lista_declaraciones -> lista_declaraciones si .)
+    IF              reduce using rule 4 (lista_declaraciones -> lista_declaraciones si .)
+    WHILE           reduce using rule 4 (lista_declaraciones -> lista_declaraciones si .)
+    FOR             reduce using rule 4 (lista_declaraciones -> lista_declaraciones si .)
+    INT             reduce using rule 4 (lista_declaraciones -> lista_declaraciones si .)
+    BOOL            reduce using rule 4 (lista_declaraciones -> lista_declaraciones si .)
+    STG             reduce using rule 4 (lista_declaraciones -> lista_declaraciones si .)
+    REAL            reduce using rule 4 (lista_declaraciones -> lista_declaraciones si .)
+
+
+state 31
+
+    (5) lista_declaraciones -> lista_declaraciones mientras .
+
+    LLAVE_C         reduce using rule 5 (lista_declaraciones -> lista_declaraciones mientras .)
+    IF              reduce using rule 5 (lista_declaraciones -> lista_declaraciones mientras .)
+    WHILE           reduce using rule 5 (lista_declaraciones -> lista_declaraciones mientras .)
+    FOR             reduce using rule 5 (lista_declaraciones -> lista_declaraciones mientras .)
+    INT             reduce using rule 5 (lista_declaraciones -> lista_declaraciones mientras .)
+    BOOL            reduce using rule 5 (lista_declaraciones -> lista_declaraciones mientras .)
+    STG             reduce using rule 5 (lista_declaraciones -> lista_declaraciones mientras .)
+    REAL            reduce using rule 5 (lista_declaraciones -> lista_declaraciones mientras .)
+
+
+state 32
+
+    (6) lista_declaraciones -> lista_declaraciones for_loop .
+
+    LLAVE_C         reduce using rule 6 (lista_declaraciones -> lista_declaraciones for_loop .)
+    IF              reduce using rule 6 (lista_declaraciones -> lista_declaraciones for_loop .)
+    WHILE           reduce using rule 6 (lista_declaraciones -> lista_declaraciones for_loop .)
+    FOR             reduce using rule 6 (lista_declaraciones -> lista_declaraciones for_loop .)
+    INT             reduce using rule 6 (lista_declaraciones -> lista_declaraciones for_loop .)
+    BOOL            reduce using rule 6 (lista_declaraciones -> lista_declaraciones for_loop .)
+    STG             reduce using rule 6 (lista_declaraciones -> lista_declaraciones for_loop .)
+    REAL            reduce using rule 6 (lista_declaraciones -> lista_declaraciones for_loop .)
+
+
+state 33
+
+    (44) lista_declaraciones -> MOVE_TO PARENTESIS_A . NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA
+
+    NUMERO          shift and go to state 46
+
+
+state 34
+
+    (45) lista_declaraciones -> WAIT_MOTION PARENTESIS_A . PARENTESIS_B PUNTOCOMA
+
+    PARENTESIS_B    shift and go to state 47
+
+
+state 35
+
+    (46) lista_declaraciones -> START_RECORD PARENTESIS_A . PARENTESIS_B PUNTOCOMA
+
+    PARENTESIS_B    shift and go to state 48
+
+
+state 36
+
+    (47) lista_declaraciones -> STOP_RECORD PARENTESIS_A . PARENTESIS_B PUNTOCOMA
+
+    PARENTESIS_B    shift and go to state 49
+
+
+state 37
+
+    (48) lista_declaraciones -> LIGHT_ON PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 48 (lista_declaraciones -> LIGHT_ON PUNTOCOMA .)
+    IF              reduce using rule 48 (lista_declaraciones -> LIGHT_ON PUNTOCOMA .)
+    WHILE           reduce using rule 48 (lista_declaraciones -> LIGHT_ON PUNTOCOMA .)
+    FOR             reduce using rule 48 (lista_declaraciones -> LIGHT_ON PUNTOCOMA .)
+    INT             reduce using rule 48 (lista_declaraciones -> LIGHT_ON PUNTOCOMA .)
+    BOOL            reduce using rule 48 (lista_declaraciones -> LIGHT_ON PUNTOCOMA .)
+    STG             reduce using rule 48 (lista_declaraciones -> LIGHT_ON PUNTOCOMA .)
+    REAL            reduce using rule 48 (lista_declaraciones -> LIGHT_ON PUNTOCOMA .)
+
+
+state 38
+
+    (49) lista_declaraciones -> LIGHT_OFF PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 49 (lista_declaraciones -> LIGHT_OFF PUNTOCOMA .)
+    IF              reduce using rule 49 (lista_declaraciones -> LIGHT_OFF PUNTOCOMA .)
+    WHILE           reduce using rule 49 (lista_declaraciones -> LIGHT_OFF PUNTOCOMA .)
+    FOR             reduce using rule 49 (lista_declaraciones -> LIGHT_OFF PUNTOCOMA .)
+    INT             reduce using rule 49 (lista_declaraciones -> LIGHT_OFF PUNTOCOMA .)
+    BOOL            reduce using rule 49 (lista_declaraciones -> LIGHT_OFF PUNTOCOMA .)
+    STG             reduce using rule 49 (lista_declaraciones -> LIGHT_OFF PUNTOCOMA .)
+    REAL            reduce using rule 49 (lista_declaraciones -> LIGHT_OFF PUNTOCOMA .)
+
+
+state 39
+
+    (50) lista_declaraciones -> ALARM_ON PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 50 (lista_declaraciones -> ALARM_ON PUNTOCOMA .)
+    IF              reduce using rule 50 (lista_declaraciones -> ALARM_ON PUNTOCOMA .)
+    WHILE           reduce using rule 50 (lista_declaraciones -> ALARM_ON PUNTOCOMA .)
+    FOR             reduce using rule 50 (lista_declaraciones -> ALARM_ON PUNTOCOMA .)
+    INT             reduce using rule 50 (lista_declaraciones -> ALARM_ON PUNTOCOMA .)
+    BOOL            reduce using rule 50 (lista_declaraciones -> ALARM_ON PUNTOCOMA .)
+    STG             reduce using rule 50 (lista_declaraciones -> ALARM_ON PUNTOCOMA .)
+    REAL            reduce using rule 50 (lista_declaraciones -> ALARM_ON PUNTOCOMA .)
+
+
+state 40
+
+    (51) lista_declaraciones -> ALARM_OFF PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 51 (lista_declaraciones -> ALARM_OFF PUNTOCOMA .)
+    IF              reduce using rule 51 (lista_declaraciones -> ALARM_OFF PUNTOCOMA .)
+    WHILE           reduce using rule 51 (lista_declaraciones -> ALARM_OFF PUNTOCOMA .)
+    FOR             reduce using rule 51 (lista_declaraciones -> ALARM_OFF PUNTOCOMA .)
+    INT             reduce using rule 51 (lista_declaraciones -> ALARM_OFF PUNTOCOMA .)
+    BOOL            reduce using rule 51 (lista_declaraciones -> ALARM_OFF PUNTOCOMA .)
+    STG             reduce using rule 51 (lista_declaraciones -> ALARM_OFF PUNTOCOMA .)
+    REAL            reduce using rule 51 (lista_declaraciones -> ALARM_OFF PUNTOCOMA .)
+
+
+state 41
+
+    (52) lista_declaraciones -> STOP PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 52 (lista_declaraciones -> STOP PUNTOCOMA .)
+    IF              reduce using rule 52 (lista_declaraciones -> STOP PUNTOCOMA .)
+    WHILE           reduce using rule 52 (lista_declaraciones -> STOP PUNTOCOMA .)
+    FOR             reduce using rule 52 (lista_declaraciones -> STOP PUNTOCOMA .)
+    INT             reduce using rule 52 (lista_declaraciones -> STOP PUNTOCOMA .)
+    BOOL            reduce using rule 52 (lista_declaraciones -> STOP PUNTOCOMA .)
+    STG             reduce using rule 52 (lista_declaraciones -> STOP PUNTOCOMA .)
+    REAL            reduce using rule 52 (lista_declaraciones -> STOP PUNTOCOMA .)
+
+
+state 42
+
+    (11) declaracion -> tipo ID . ASIGNACION expresion PUNTOCOMA
+    (12) declaracion -> tipo ID . ASIGNACION expresion
+    (13) declaracion -> tipo ID . ASIGNACION PUNTOCOMA
+
+    ASIGNACION      shift and go to state 50
+
+
+state 43
+
+    (34) si -> IF PARENTESIS_A . expresion PARENTESIS_B bloque_codigo
+    (35) si -> IF PARENTESIS_A . expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 52
+
+state 44
+
+    (36) mientras -> WHILE PARENTESIS_A . expresion PARENTESIS_B bloque_codigo
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 58
+
+state 45
+
+    (37) for_loop -> FOR PARENTESIS_A . for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
+    (38) for_init -> . tipo ID ASIGNACION expresion
+    (39) for_init -> . ID ASIGNACION expresion
+    (14) tipo -> . INT
+    (15) tipo -> . BOOL
+    (16) tipo -> . STG
+    (17) tipo -> . REAL
+
+    ID              shift and go to state 61
+    INT             shift and go to state 24
+    BOOL            shift and go to state 25
+    STG             shift and go to state 26
+    REAL            shift and go to state 27
+
+    for_init                       shift and go to state 59
+    tipo                           shift and go to state 60
+
+state 46
+
+    (44) lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO . COMA NUMERO PARENTESIS_B PUNTOCOMA
+
+    COMA            shift and go to state 62
+
+
+state 47
+
+    (45) lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 63
+
+
+state 48
+
+    (46) lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 64
+
+
+state 49
+
+    (47) lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 65
+
+
+state 50
+
+    (11) declaracion -> tipo ID ASIGNACION . expresion PUNTOCOMA
+    (12) declaracion -> tipo ID ASIGNACION . expresion
+    (13) declaracion -> tipo ID ASIGNACION . PUNTOCOMA
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PUNTOCOMA       shift and go to state 67
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 66
+
+state 51
+
+    (28) expresion -> PARENTESIS_A . expresion PARENTESIS_B
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 68
+
+state 52
+
+    (34) si -> IF PARENTESIS_A expresion . PARENTESIS_B bloque_codigo
+    (35) si -> IF PARENTESIS_A expresion . PARENTESIS_B bloque_codigo ELSE bloque_codigo
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    shift and go to state 69
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+    IGUAL           shift and go to state 78
+    DIFERENTE       shift and go to state 79
+
+
+state 53
+
+    (29) expresion -> NUMERO .
+
+    PARENTESIS_B    reduce using rule 29 (expresion -> NUMERO .)
+    SUMA            reduce using rule 29 (expresion -> NUMERO .)
+    RESTA           reduce using rule 29 (expresion -> NUMERO .)
+    MULTIPLICACION  reduce using rule 29 (expresion -> NUMERO .)
+    DIVISION        reduce using rule 29 (expresion -> NUMERO .)
+    MENORQUE        reduce using rule 29 (expresion -> NUMERO .)
+    MENORIGUAL      reduce using rule 29 (expresion -> NUMERO .)
+    MAYORQUE        reduce using rule 29 (expresion -> NUMERO .)
+    MAYORIGUAL      reduce using rule 29 (expresion -> NUMERO .)
+    IGUAL           reduce using rule 29 (expresion -> NUMERO .)
+    DIFERENTE       reduce using rule 29 (expresion -> NUMERO .)
+    PUNTOCOMA       reduce using rule 29 (expresion -> NUMERO .)
+    LLAVE_C         reduce using rule 29 (expresion -> NUMERO .)
+    IF              reduce using rule 29 (expresion -> NUMERO .)
+    WHILE           reduce using rule 29 (expresion -> NUMERO .)
+    FOR             reduce using rule 29 (expresion -> NUMERO .)
+    INT             reduce using rule 29 (expresion -> NUMERO .)
+    BOOL            reduce using rule 29 (expresion -> NUMERO .)
+    STG             reduce using rule 29 (expresion -> NUMERO .)
+    REAL            reduce using rule 29 (expresion -> NUMERO .)
+
+
+state 54
+
+    (30) expresion -> REAL .
+
+    PARENTESIS_B    reduce using rule 30 (expresion -> REAL .)
+    SUMA            reduce using rule 30 (expresion -> REAL .)
+    RESTA           reduce using rule 30 (expresion -> REAL .)
+    MULTIPLICACION  reduce using rule 30 (expresion -> REAL .)
+    DIVISION        reduce using rule 30 (expresion -> REAL .)
+    MENORQUE        reduce using rule 30 (expresion -> REAL .)
+    MENORIGUAL      reduce using rule 30 (expresion -> REAL .)
+    MAYORQUE        reduce using rule 30 (expresion -> REAL .)
+    MAYORIGUAL      reduce using rule 30 (expresion -> REAL .)
+    IGUAL           reduce using rule 30 (expresion -> REAL .)
+    DIFERENTE       reduce using rule 30 (expresion -> REAL .)
+    PUNTOCOMA       reduce using rule 30 (expresion -> REAL .)
+    LLAVE_C         reduce using rule 30 (expresion -> REAL .)
+    IF              reduce using rule 30 (expresion -> REAL .)
+    WHILE           reduce using rule 30 (expresion -> REAL .)
+    FOR             reduce using rule 30 (expresion -> REAL .)
+    INT             reduce using rule 30 (expresion -> REAL .)
+    BOOL            reduce using rule 30 (expresion -> REAL .)
+    STG             reduce using rule 30 (expresion -> REAL .)
+    REAL            reduce using rule 30 (expresion -> REAL .)
+
+
+state 55
+
+    (31) expresion -> CADENA .
+
+    PARENTESIS_B    reduce using rule 31 (expresion -> CADENA .)
+    SUMA            reduce using rule 31 (expresion -> CADENA .)
+    RESTA           reduce using rule 31 (expresion -> CADENA .)
+    MULTIPLICACION  reduce using rule 31 (expresion -> CADENA .)
+    DIVISION        reduce using rule 31 (expresion -> CADENA .)
+    MENORQUE        reduce using rule 31 (expresion -> CADENA .)
+    MENORIGUAL      reduce using rule 31 (expresion -> CADENA .)
+    MAYORQUE        reduce using rule 31 (expresion -> CADENA .)
+    MAYORIGUAL      reduce using rule 31 (expresion -> CADENA .)
+    IGUAL           reduce using rule 31 (expresion -> CADENA .)
+    DIFERENTE       reduce using rule 31 (expresion -> CADENA .)
+    PUNTOCOMA       reduce using rule 31 (expresion -> CADENA .)
+    LLAVE_C         reduce using rule 31 (expresion -> CADENA .)
+    IF              reduce using rule 31 (expresion -> CADENA .)
+    WHILE           reduce using rule 31 (expresion -> CADENA .)
+    FOR             reduce using rule 31 (expresion -> CADENA .)
+    INT             reduce using rule 31 (expresion -> CADENA .)
+    BOOL            reduce using rule 31 (expresion -> CADENA .)
+    STG             reduce using rule 31 (expresion -> CADENA .)
+    REAL            reduce using rule 31 (expresion -> CADENA .)
+
+
+state 56
+
+    (32) expresion -> TRUE .
+
+    PARENTESIS_B    reduce using rule 32 (expresion -> TRUE .)
+    SUMA            reduce using rule 32 (expresion -> TRUE .)
+    RESTA           reduce using rule 32 (expresion -> TRUE .)
+    MULTIPLICACION  reduce using rule 32 (expresion -> TRUE .)
+    DIVISION        reduce using rule 32 (expresion -> TRUE .)
+    MENORQUE        reduce using rule 32 (expresion -> TRUE .)
+    MENORIGUAL      reduce using rule 32 (expresion -> TRUE .)
+    MAYORQUE        reduce using rule 32 (expresion -> TRUE .)
+    MAYORIGUAL      reduce using rule 32 (expresion -> TRUE .)
+    IGUAL           reduce using rule 32 (expresion -> TRUE .)
+    DIFERENTE       reduce using rule 32 (expresion -> TRUE .)
+    PUNTOCOMA       reduce using rule 32 (expresion -> TRUE .)
+    LLAVE_C         reduce using rule 32 (expresion -> TRUE .)
+    IF              reduce using rule 32 (expresion -> TRUE .)
+    WHILE           reduce using rule 32 (expresion -> TRUE .)
+    FOR             reduce using rule 32 (expresion -> TRUE .)
+    INT             reduce using rule 32 (expresion -> TRUE .)
+    BOOL            reduce using rule 32 (expresion -> TRUE .)
+    STG             reduce using rule 32 (expresion -> TRUE .)
+    REAL            reduce using rule 32 (expresion -> TRUE .)
+
+
+state 57
+
+    (33) expresion -> FALSE .
+
+    PARENTESIS_B    reduce using rule 33 (expresion -> FALSE .)
+    SUMA            reduce using rule 33 (expresion -> FALSE .)
+    RESTA           reduce using rule 33 (expresion -> FALSE .)
+    MULTIPLICACION  reduce using rule 33 (expresion -> FALSE .)
+    DIVISION        reduce using rule 33 (expresion -> FALSE .)
+    MENORQUE        reduce using rule 33 (expresion -> FALSE .)
+    MENORIGUAL      reduce using rule 33 (expresion -> FALSE .)
+    MAYORQUE        reduce using rule 33 (expresion -> FALSE .)
+    MAYORIGUAL      reduce using rule 33 (expresion -> FALSE .)
+    IGUAL           reduce using rule 33 (expresion -> FALSE .)
+    DIFERENTE       reduce using rule 33 (expresion -> FALSE .)
+    PUNTOCOMA       reduce using rule 33 (expresion -> FALSE .)
+    LLAVE_C         reduce using rule 33 (expresion -> FALSE .)
+    IF              reduce using rule 33 (expresion -> FALSE .)
+    WHILE           reduce using rule 33 (expresion -> FALSE .)
+    FOR             reduce using rule 33 (expresion -> FALSE .)
+    INT             reduce using rule 33 (expresion -> FALSE .)
+    BOOL            reduce using rule 33 (expresion -> FALSE .)
+    STG             reduce using rule 33 (expresion -> FALSE .)
+    REAL            reduce using rule 33 (expresion -> FALSE .)
+
+
+state 58
+
+    (36) mientras -> WHILE PARENTESIS_A expresion . PARENTESIS_B bloque_codigo
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    shift and go to state 80
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+    IGUAL           shift and go to state 78
+    DIFERENTE       shift and go to state 79
+
+
+state 59
+
+    (37) for_loop -> FOR PARENTESIS_A for_init . PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
+
+    PUNTOCOMA       shift and go to state 81
+
+
+state 60
+
+    (38) for_init -> tipo . ID ASIGNACION expresion
+
+    ID              shift and go to state 82
+
+
+state 61
+
+    (39) for_init -> ID . ASIGNACION expresion
+
+    ASIGNACION      shift and go to state 83
+
+
+state 62
+
+    (44) lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA . NUMERO PARENTESIS_B PUNTOCOMA
+
+    NUMERO          shift and go to state 84
+
+
+state 63
+
+    (45) lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 45 (lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    IF              reduce using rule 45 (lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    WHILE           reduce using rule 45 (lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    FOR             reduce using rule 45 (lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    INT             reduce using rule 45 (lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    BOOL            reduce using rule 45 (lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    STG             reduce using rule 45 (lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    REAL            reduce using rule 45 (lista_declaraciones -> WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+
+
+state 64
+
+    (46) lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 46 (lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    IF              reduce using rule 46 (lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    WHILE           reduce using rule 46 (lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    FOR             reduce using rule 46 (lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    INT             reduce using rule 46 (lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    BOOL            reduce using rule 46 (lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    STG             reduce using rule 46 (lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    REAL            reduce using rule 46 (lista_declaraciones -> START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+
+
+state 65
+
+    (47) lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 47 (lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    IF              reduce using rule 47 (lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    WHILE           reduce using rule 47 (lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    FOR             reduce using rule 47 (lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    INT             reduce using rule 47 (lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    BOOL            reduce using rule 47 (lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    STG             reduce using rule 47 (lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+    REAL            reduce using rule 47 (lista_declaraciones -> STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA .)
+
+
+state 66
+
+    (11) declaracion -> tipo ID ASIGNACION expresion . PUNTOCOMA
+    (12) declaracion -> tipo ID ASIGNACION expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PUNTOCOMA       shift and go to state 85
+    LLAVE_C         reduce using rule 12 (declaracion -> tipo ID ASIGNACION expresion .)
+    IF              reduce using rule 12 (declaracion -> tipo ID ASIGNACION expresion .)
+    WHILE           reduce using rule 12 (declaracion -> tipo ID ASIGNACION expresion .)
+    FOR             reduce using rule 12 (declaracion -> tipo ID ASIGNACION expresion .)
+    INT             reduce using rule 12 (declaracion -> tipo ID ASIGNACION expresion .)
+    BOOL            reduce using rule 12 (declaracion -> tipo ID ASIGNACION expresion .)
+    STG             reduce using rule 12 (declaracion -> tipo ID ASIGNACION expresion .)
+    REAL            reduce using rule 12 (declaracion -> tipo ID ASIGNACION expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+    IGUAL           shift and go to state 78
+    DIFERENTE       shift and go to state 79
+
+
+state 67
+
+    (13) declaracion -> tipo ID ASIGNACION PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 13 (declaracion -> tipo ID ASIGNACION PUNTOCOMA .)
+    IF              reduce using rule 13 (declaracion -> tipo ID ASIGNACION PUNTOCOMA .)
+    WHILE           reduce using rule 13 (declaracion -> tipo ID ASIGNACION PUNTOCOMA .)
+    FOR             reduce using rule 13 (declaracion -> tipo ID ASIGNACION PUNTOCOMA .)
+    INT             reduce using rule 13 (declaracion -> tipo ID ASIGNACION PUNTOCOMA .)
+    BOOL            reduce using rule 13 (declaracion -> tipo ID ASIGNACION PUNTOCOMA .)
+    STG             reduce using rule 13 (declaracion -> tipo ID ASIGNACION PUNTOCOMA .)
+    REAL            reduce using rule 13 (declaracion -> tipo ID ASIGNACION PUNTOCOMA .)
+
+
+state 68
+
+    (28) expresion -> PARENTESIS_A expresion . PARENTESIS_B
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    shift and go to state 86
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+    IGUAL           shift and go to state 78
+    DIFERENTE       shift and go to state 79
+
+
+state 69
+
+    (34) si -> IF PARENTESIS_A expresion PARENTESIS_B . bloque_codigo
+    (35) si -> IF PARENTESIS_A expresion PARENTESIS_B . bloque_codigo ELSE bloque_codigo
+    (2) bloque_codigo -> . LLAVE_A lista_declaraciones LLAVE_C
+
+    LLAVE_A         shift and go to state 4
+
+    bloque_codigo                  shift and go to state 87
+
+state 70
+
+    (18) expresion -> expresion SUMA . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 88
+
+state 71
+
+    (19) expresion -> expresion RESTA . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 89
+
+state 72
+
+    (20) expresion -> expresion MULTIPLICACION . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 90
+
+state 73
+
+    (21) expresion -> expresion DIVISION . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 91
+
+state 74
+
+    (22) expresion -> expresion MENORQUE . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 92
+
+state 75
+
+    (23) expresion -> expresion MENORIGUAL . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 93
+
+state 76
+
+    (24) expresion -> expresion MAYORQUE . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 94
+
+state 77
+
+    (25) expresion -> expresion MAYORIGUAL . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 95
+
+state 78
+
+    (26) expresion -> expresion IGUAL . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 96
+
+state 79
+
+    (27) expresion -> expresion DIFERENTE . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 97
+
+state 80
+
+    (36) mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B . bloque_codigo
+    (2) bloque_codigo -> . LLAVE_A lista_declaraciones LLAVE_C
+
+    LLAVE_A         shift and go to state 4
+
+    bloque_codigo                  shift and go to state 98
+
+state 81
+
+    (37) for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA . for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
+    (40) for_condicion -> . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    for_condicion                  shift and go to state 99
+    expresion                      shift and go to state 100
+
+state 82
+
+    (38) for_init -> tipo ID . ASIGNACION expresion
+
+    ASIGNACION      shift and go to state 101
+
+
+state 83
+
+    (39) for_init -> ID ASIGNACION . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 102
+
+state 84
+
+    (44) lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO . PARENTESIS_B PUNTOCOMA
+
+    PARENTESIS_B    shift and go to state 103
+
+
+state 85
+
+    (11) declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 11 (declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .)
+    IF              reduce using rule 11 (declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .)
+    WHILE           reduce using rule 11 (declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .)
+    FOR             reduce using rule 11 (declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .)
+    INT             reduce using rule 11 (declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .)
+    BOOL            reduce using rule 11 (declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .)
+    STG             reduce using rule 11 (declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .)
+    REAL            reduce using rule 11 (declaracion -> tipo ID ASIGNACION expresion PUNTOCOMA .)
+
+
+state 86
+
+    (28) expresion -> PARENTESIS_A expresion PARENTESIS_B .
+
+    PARENTESIS_B    reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    SUMA            reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    RESTA           reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    MULTIPLICACION  reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    DIVISION        reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    MENORQUE        reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    MENORIGUAL      reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    MAYORQUE        reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    MAYORIGUAL      reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    IGUAL           reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    DIFERENTE       reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    PUNTOCOMA       reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    LLAVE_C         reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    IF              reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    WHILE           reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    FOR             reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    INT             reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    BOOL            reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    STG             reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+    REAL            reduce using rule 28 (expresion -> PARENTESIS_A expresion PARENTESIS_B .)
+
+
+state 87
+
+    (34) si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .
+    (35) si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo . ELSE bloque_codigo
+
+    LLAVE_C         reduce using rule 34 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    IF              reduce using rule 34 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    WHILE           reduce using rule 34 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    FOR             reduce using rule 34 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    INT             reduce using rule 34 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    BOOL            reduce using rule 34 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    STG             reduce using rule 34 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    REAL            reduce using rule 34 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    ELSE            shift and go to state 104
+
+
+state 88
+
+    (18) expresion -> expresion SUMA expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    SUMA            reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    RESTA           reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    MENORQUE        reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    MENORIGUAL      reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    MAYORQUE        reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    MAYORIGUAL      reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    IGUAL           reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    DIFERENTE       reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    PUNTOCOMA       reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    LLAVE_C         reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    IF              reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    WHILE           reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    FOR             reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    INT             reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    BOOL            reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    STG             reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    REAL            reduce using rule 18 (expresion -> expresion SUMA expresion .)
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+
+  ! MULTIPLICACION  [ reduce using rule 18 (expresion -> expresion SUMA expresion .) ]
+  ! DIVISION        [ reduce using rule 18 (expresion -> expresion SUMA expresion .) ]
+  ! SUMA            [ shift and go to state 70 ]
+  ! RESTA           [ shift and go to state 71 ]
+  ! MENORQUE        [ shift and go to state 74 ]
+  ! MENORIGUAL      [ shift and go to state 75 ]
+  ! MAYORQUE        [ shift and go to state 76 ]
+  ! MAYORIGUAL      [ shift and go to state 77 ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 89
+
+    (19) expresion -> expresion RESTA expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    SUMA            reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    RESTA           reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    MENORQUE        reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    MENORIGUAL      reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    MAYORQUE        reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    MAYORIGUAL      reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    IGUAL           reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    DIFERENTE       reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    PUNTOCOMA       reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    LLAVE_C         reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    IF              reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    WHILE           reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    FOR             reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    INT             reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    BOOL            reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    STG             reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    REAL            reduce using rule 19 (expresion -> expresion RESTA expresion .)
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+
+  ! MULTIPLICACION  [ reduce using rule 19 (expresion -> expresion RESTA expresion .) ]
+  ! DIVISION        [ reduce using rule 19 (expresion -> expresion RESTA expresion .) ]
+  ! SUMA            [ shift and go to state 70 ]
+  ! RESTA           [ shift and go to state 71 ]
+  ! MENORQUE        [ shift and go to state 74 ]
+  ! MENORIGUAL      [ shift and go to state 75 ]
+  ! MAYORQUE        [ shift and go to state 76 ]
+  ! MAYORIGUAL      [ shift and go to state 77 ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 90
+
+    (20) expresion -> expresion MULTIPLICACION expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    SUMA            reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    RESTA           reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    MULTIPLICACION  reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    DIVISION        reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    MENORQUE        reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    MENORIGUAL      reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    MAYORQUE        reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    MAYORIGUAL      reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    IGUAL           reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    DIFERENTE       reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    PUNTOCOMA       reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    LLAVE_C         reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    IF              reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    WHILE           reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    FOR             reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    INT             reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    BOOL            reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    STG             reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+    REAL            reduce using rule 20 (expresion -> expresion MULTIPLICACION expresion .)
+
+  ! SUMA            [ shift and go to state 70 ]
+  ! RESTA           [ shift and go to state 71 ]
+  ! MULTIPLICACION  [ shift and go to state 72 ]
+  ! DIVISION        [ shift and go to state 73 ]
+  ! MENORQUE        [ shift and go to state 74 ]
+  ! MENORIGUAL      [ shift and go to state 75 ]
+  ! MAYORQUE        [ shift and go to state 76 ]
+  ! MAYORIGUAL      [ shift and go to state 77 ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 91
+
+    (21) expresion -> expresion DIVISION expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    SUMA            reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    RESTA           reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    MULTIPLICACION  reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    DIVISION        reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    MENORQUE        reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    MENORIGUAL      reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    MAYORQUE        reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    MAYORIGUAL      reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    IGUAL           reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    DIFERENTE       reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    PUNTOCOMA       reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    LLAVE_C         reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    IF              reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    WHILE           reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    FOR             reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    INT             reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    BOOL            reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    STG             reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+    REAL            reduce using rule 21 (expresion -> expresion DIVISION expresion .)
+
+  ! SUMA            [ shift and go to state 70 ]
+  ! RESTA           [ shift and go to state 71 ]
+  ! MULTIPLICACION  [ shift and go to state 72 ]
+  ! DIVISION        [ shift and go to state 73 ]
+  ! MENORQUE        [ shift and go to state 74 ]
+  ! MENORIGUAL      [ shift and go to state 75 ]
+  ! MAYORQUE        [ shift and go to state 76 ]
+  ! MAYORIGUAL      [ shift and go to state 77 ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 92
+
+    (22) expresion -> expresion MENORQUE expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    MENORQUE        reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    MENORIGUAL      reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    MAYORQUE        reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    MAYORIGUAL      reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    IGUAL           reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    DIFERENTE       reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    PUNTOCOMA       reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    LLAVE_C         reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    IF              reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    WHILE           reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    FOR             reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    INT             reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    BOOL            reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    STG             reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    REAL            reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+
+  ! SUMA            [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! RESTA           [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! DIVISION        [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! MENORQUE        [ shift and go to state 74 ]
+  ! MENORIGUAL      [ shift and go to state 75 ]
+  ! MAYORQUE        [ shift and go to state 76 ]
+  ! MAYORIGUAL      [ shift and go to state 77 ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 93
+
+    (23) expresion -> expresion MENORIGUAL expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    MENORQUE        reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    MENORIGUAL      reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    MAYORQUE        reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    MAYORIGUAL      reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    IGUAL           reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    DIFERENTE       reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    PUNTOCOMA       reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    LLAVE_C         reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    IF              reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    WHILE           reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    FOR             reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    INT             reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    BOOL            reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    STG             reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    REAL            reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+
+  ! SUMA            [ reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! RESTA           [ reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! DIVISION        [ reduce using rule 23 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! MENORQUE        [ shift and go to state 74 ]
+  ! MENORIGUAL      [ shift and go to state 75 ]
+  ! MAYORQUE        [ shift and go to state 76 ]
+  ! MAYORIGUAL      [ shift and go to state 77 ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 94
+
+    (24) expresion -> expresion MAYORQUE expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    MENORQUE        reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    MENORIGUAL      reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    MAYORQUE        reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    MAYORIGUAL      reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    IGUAL           reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    DIFERENTE       reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    PUNTOCOMA       reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    LLAVE_C         reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    IF              reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    WHILE           reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    FOR             reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    INT             reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    BOOL            reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    STG             reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    REAL            reduce using rule 24 (expresion -> expresion MAYORQUE expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+
+  ! SUMA            [ reduce using rule 24 (expresion -> expresion MAYORQUE expresion .) ]
+  ! RESTA           [ reduce using rule 24 (expresion -> expresion MAYORQUE expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 24 (expresion -> expresion MAYORQUE expresion .) ]
+  ! DIVISION        [ reduce using rule 24 (expresion -> expresion MAYORQUE expresion .) ]
+  ! MENORQUE        [ shift and go to state 74 ]
+  ! MENORIGUAL      [ shift and go to state 75 ]
+  ! MAYORQUE        [ shift and go to state 76 ]
+  ! MAYORIGUAL      [ shift and go to state 77 ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 95
+
+    (25) expresion -> expresion MAYORIGUAL expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    MENORQUE        reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    MENORIGUAL      reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    MAYORQUE        reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    MAYORIGUAL      reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    IGUAL           reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    DIFERENTE       reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    PUNTOCOMA       reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    LLAVE_C         reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    IF              reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    WHILE           reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    FOR             reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    INT             reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    BOOL            reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    STG             reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    REAL            reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+
+  ! SUMA            [ reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! RESTA           [ reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! DIVISION        [ reduce using rule 25 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! MENORQUE        [ shift and go to state 74 ]
+  ! MENORIGUAL      [ shift and go to state 75 ]
+  ! MAYORQUE        [ shift and go to state 76 ]
+  ! MAYORIGUAL      [ shift and go to state 77 ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 96
+
+    (26) expresion -> expresion IGUAL expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    IGUAL           reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    DIFERENTE       reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    PUNTOCOMA       reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    LLAVE_C         reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    IF              reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    WHILE           reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    FOR             reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    INT             reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    BOOL            reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    STG             reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    REAL            reduce using rule 26 (expresion -> expresion IGUAL expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+
+  ! SUMA            [ reduce using rule 26 (expresion -> expresion IGUAL expresion .) ]
+  ! RESTA           [ reduce using rule 26 (expresion -> expresion IGUAL expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 26 (expresion -> expresion IGUAL expresion .) ]
+  ! DIVISION        [ reduce using rule 26 (expresion -> expresion IGUAL expresion .) ]
+  ! MENORQUE        [ reduce using rule 26 (expresion -> expresion IGUAL expresion .) ]
+  ! MENORIGUAL      [ reduce using rule 26 (expresion -> expresion IGUAL expresion .) ]
+  ! MAYORQUE        [ reduce using rule 26 (expresion -> expresion IGUAL expresion .) ]
+  ! MAYORIGUAL      [ reduce using rule 26 (expresion -> expresion IGUAL expresion .) ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 97
+
+    (27) expresion -> expresion DIFERENTE expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    IGUAL           reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    DIFERENTE       reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    PUNTOCOMA       reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    LLAVE_C         reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    IF              reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    WHILE           reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    FOR             reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    INT             reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    BOOL            reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    STG             reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    REAL            reduce using rule 27 (expresion -> expresion DIFERENTE expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+
+  ! SUMA            [ reduce using rule 27 (expresion -> expresion DIFERENTE expresion .) ]
+  ! RESTA           [ reduce using rule 27 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 27 (expresion -> expresion DIFERENTE expresion .) ]
+  ! DIVISION        [ reduce using rule 27 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MENORQUE        [ reduce using rule 27 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MENORIGUAL      [ reduce using rule 27 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MAYORQUE        [ reduce using rule 27 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MAYORIGUAL      [ reduce using rule 27 (expresion -> expresion DIFERENTE expresion .) ]
+  ! IGUAL           [ shift and go to state 78 ]
+  ! DIFERENTE       [ shift and go to state 79 ]
+
+
+state 98
+
+    (36) mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .
+
+    LLAVE_C         reduce using rule 36 (mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    IF              reduce using rule 36 (mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    WHILE           reduce using rule 36 (mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    FOR             reduce using rule 36 (mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    INT             reduce using rule 36 (mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    BOOL            reduce using rule 36 (mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    STG             reduce using rule 36 (mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+    REAL            reduce using rule 36 (mientras -> WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo .)
+
+
+state 99
+
+    (37) for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion . PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
+
+    PUNTOCOMA       shift and go to state 105
+
+
+state 100
+
+    (40) for_condicion -> expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PUNTOCOMA       reduce using rule 40 (for_condicion -> expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+    IGUAL           shift and go to state 78
+    DIFERENTE       shift and go to state 79
+
+
+state 101
+
+    (38) for_init -> tipo ID ASIGNACION . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 106
+
+state 102
+
+    (39) for_init -> ID ASIGNACION expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PUNTOCOMA       reduce using rule 39 (for_init -> ID ASIGNACION expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+    IGUAL           shift and go to state 78
+    DIFERENTE       shift and go to state 79
+
+
+state 103
+
+    (44) lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 107
+
+
+state 104
+
+    (35) si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE . bloque_codigo
+    (2) bloque_codigo -> . LLAVE_A lista_declaraciones LLAVE_C
+
+    LLAVE_A         shift and go to state 4
+
+    bloque_codigo                  shift and go to state 108
+
+state 105
+
+    (37) for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA . for_actualizacion PARENTESIS_B bloque_codigo
+    (41) for_actualizacion -> . ID ASIGNACION expresion
+    (42) for_actualizacion -> . ID MASMAS
+    (43) for_actualizacion -> . ID MENOSMENOS
+
+    ID              shift and go to state 110
+
+    for_actualizacion              shift and go to state 109
+
+state 106
+
+    (38) for_init -> tipo ID ASIGNACION expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PUNTOCOMA       reduce using rule 38 (for_init -> tipo ID ASIGNACION expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+    IGUAL           shift and go to state 78
+    DIFERENTE       shift and go to state 79
+
+
+state 107
+
+    (44) lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .
+
+    LLAVE_C         reduce using rule 44 (lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .)
+    IF              reduce using rule 44 (lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .)
+    WHILE           reduce using rule 44 (lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .)
+    FOR             reduce using rule 44 (lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .)
+    INT             reduce using rule 44 (lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .)
+    BOOL            reduce using rule 44 (lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .)
+    STG             reduce using rule 44 (lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .)
+    REAL            reduce using rule 44 (lista_declaraciones -> MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA .)
+
+
+state 108
+
+    (35) si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .
+
+    LLAVE_C         reduce using rule 35 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .)
+    IF              reduce using rule 35 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .)
+    WHILE           reduce using rule 35 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .)
+    FOR             reduce using rule 35 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .)
+    INT             reduce using rule 35 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .)
+    BOOL            reduce using rule 35 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .)
+    STG             reduce using rule 35 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .)
+    REAL            reduce using rule 35 (si -> IF PARENTESIS_A expresion PARENTESIS_B bloque_codigo ELSE bloque_codigo .)
+
+
+state 109
+
+    (37) for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion . PARENTESIS_B bloque_codigo
+
+    PARENTESIS_B    shift and go to state 111
+
+
+state 110
+
+    (41) for_actualizacion -> ID . ASIGNACION expresion
+    (42) for_actualizacion -> ID . MASMAS
+    (43) for_actualizacion -> ID . MENOSMENOS
+
+    ASIGNACION      shift and go to state 112
+    MASMAS          shift and go to state 113
+    MENOSMENOS      shift and go to state 114
+
+
+state 111
+
+    (37) for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B . bloque_codigo
+    (2) bloque_codigo -> . LLAVE_A lista_declaraciones LLAVE_C
+
+    LLAVE_A         shift and go to state 4
+
+    bloque_codigo                  shift and go to state 115
+
+state 112
+
+    (41) for_actualizacion -> ID ASIGNACION . expresion
+    (18) expresion -> . expresion SUMA expresion
+    (19) expresion -> . expresion RESTA expresion
+    (20) expresion -> . expresion MULTIPLICACION expresion
+    (21) expresion -> . expresion DIVISION expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MENORIGUAL expresion
+    (24) expresion -> . expresion MAYORQUE expresion
+    (25) expresion -> . expresion MAYORIGUAL expresion
+    (26) expresion -> . expresion IGUAL expresion
+    (27) expresion -> . expresion DIFERENTE expresion
+    (28) expresion -> . PARENTESIS_A expresion PARENTESIS_B
+    (29) expresion -> . NUMERO
+    (30) expresion -> . REAL
+    (31) expresion -> . CADENA
+    (32) expresion -> . TRUE
+    (33) expresion -> . FALSE
+
+    PARENTESIS_A    shift and go to state 51
+    NUMERO          shift and go to state 53
+    REAL            shift and go to state 54
+    CADENA          shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+
+    expresion                      shift and go to state 116
+
+state 113
+
+    (42) for_actualizacion -> ID MASMAS .
+
+    PARENTESIS_B    reduce using rule 42 (for_actualizacion -> ID MASMAS .)
+
+
+state 114
+
+    (43) for_actualizacion -> ID MENOSMENOS .
+
+    PARENTESIS_B    reduce using rule 43 (for_actualizacion -> ID MENOSMENOS .)
+
+
+state 115
+
+    (37) for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .
+
+    LLAVE_C         reduce using rule 37 (for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .)
+    IF              reduce using rule 37 (for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .)
+    WHILE           reduce using rule 37 (for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .)
+    FOR             reduce using rule 37 (for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .)
+    INT             reduce using rule 37 (for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .)
+    BOOL            reduce using rule 37 (for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .)
+    STG             reduce using rule 37 (for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .)
+    REAL            reduce using rule 37 (for_loop -> FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo .)
+
+
+state 116
+
+    (41) for_actualizacion -> ID ASIGNACION expresion .
+    (18) expresion -> expresion . SUMA expresion
+    (19) expresion -> expresion . RESTA expresion
+    (20) expresion -> expresion . MULTIPLICACION expresion
+    (21) expresion -> expresion . DIVISION expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MENORIGUAL expresion
+    (24) expresion -> expresion . MAYORQUE expresion
+    (25) expresion -> expresion . MAYORIGUAL expresion
+    (26) expresion -> expresion . IGUAL expresion
+    (27) expresion -> expresion . DIFERENTE expresion
+
+    PARENTESIS_B    reduce using rule 41 (for_actualizacion -> ID ASIGNACION expresion .)
+    SUMA            shift and go to state 70
+    RESTA           shift and go to state 71
+    MULTIPLICACION  shift and go to state 72
+    DIVISION        shift and go to state 73
+    MENORQUE        shift and go to state 74
+    MENORIGUAL      shift and go to state 75
+    MAYORQUE        shift and go to state 76
+    MAYORIGUAL      shift and go to state 77
+    IGUAL           shift and go to state 78
+    DIFERENTE       shift and go to state 79
+
