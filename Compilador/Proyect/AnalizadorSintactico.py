@@ -152,8 +152,6 @@ def p_comando_movimiento_error(p):
     """
     errores_Sinc_Desc.append(f"Falta un parametro en la instruccion MOVE_TO en la linea {p.lineno(1)}")
 
-    
-
 def p_comando_espera(p):
     """ declaracion : WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA """
     p[0] = ('WAIT_MOTION',)
@@ -227,6 +225,11 @@ def tree_to_graphviz(tree, graph_str=None, parent_id=None, node_counter=[0]):
         # Recorrer hijos
         for child in children:
             child_id, graph_str = tree_to_graphviz(child, graph_str, current_id, node_counter)
+            graph_str += f'    {current_id} -> {child_id};\n'
+    elif isinstance(tree, list):
+        graph_str += f'    {current_id} [label="list"];\n'
+        for item in tree:
+            child_id, graph_str = tree_to_graphviz(item, graph_str, current_id, node_counter)
             graph_str += f'    {current_id} -> {child_id};\n'
     else:
         # Hoja
