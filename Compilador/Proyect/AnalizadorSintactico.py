@@ -64,11 +64,7 @@ def p_declaracion_error(p):
 
 def p_declaracion_error1(p):
     """ declaracion : tipo ID ASIGNACION expresion """
-    errores_Sinc_Desc.append("Error: falta punto y coma en la línea: " + str(p.lineno(2)))
-
-def p_declaracion_error2(p):
-    """ declaracion : tipo ID ASIGNACION PUNTOCOMA """
-    errores_Sinc_Desc.append("Error: falta la expresión a asignar en la línea: " + str(p.lineno(2)))
+    errores_Sinc_Desc.append(f"Error: falta punto y coma en la línea: {p.lineno(2)}")
 
 def p_tipo(p):
     """ tipo : INT
