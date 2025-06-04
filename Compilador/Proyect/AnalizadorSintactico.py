@@ -240,6 +240,7 @@ def tree_to_graphviz(tree, graph_str=None, parent_id=None, node_counter=[0]):
             graph_str += f'    {current_id} -> {child_id};\n'
     elif isinstance(tree, list):
         graph_str += f'    {current_id} [label="lista"];\n'
+        graph_str += f'    {current_id} [label="list"];\n'
         for item in tree:
             child_id, graph_str = tree_to_graphviz(item, graph_str, current_id, node_counter)
             graph_str += f'    {current_id} -> {child_id};\n'

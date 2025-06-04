@@ -65,7 +65,7 @@ class Compilador(Tk):
         super().__init__()
         self.centrar_ventana(800, 600)
         limpiar_errores_lex()
-        self.title("Compilador LAUSTISC")
+        self.title("Compilador Watchmen")
         self.create_widgets()
         self.filename = None  # Variable para almacenar el nombre del archivo actual
 
@@ -126,6 +126,8 @@ class Compilador(Tk):
         self.btn_compilar.pack(side="left", padx=5)
         self.btn_tokens = ttk.Button(self.buttons_compiler_panel, text="Tokens", command=self.Tokens)
         self.btn_tokens.pack(side="left", padx=5)
+        self.btn_Arbol = ttk.Button(self.buttons_compiler_panel, text="Arbol", command=self.Tokens)
+        self.btn_Arbol.pack(side="left", padx=5)
 
         # Consola de salida
         self.console_frame = ttk.Frame(self, width=30)
