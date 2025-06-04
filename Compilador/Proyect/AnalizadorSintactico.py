@@ -26,9 +26,17 @@ def p_programa(p):
     """ programa : BEGIN bloque_codigo END """
     p[0] = ('programa', p[2])
 
+def p_programa_error(p):
+    """ programa : BEGIN bloque_codigo """
+    errores_Sinc_Desc.append(f"Falta la etiqueta END al final del programa")
+
 def p_bloque_codigo(p):
     """ bloque_codigo : LLAVE_A lista_declaraciones LLAVE_C """
     p[0] = ("bloque_codigo", p[2])
+
+def p_bloque_codigo_error(p):
+    """ bloque_codigo : LLAVE_A lista_declaraciones """
+    errores_Sinc_Desc.append(f"Falta el cierre de llave al final del bloque de codigo")
 
 def p_lista_declaraciones(p):
     """
@@ -49,6 +57,10 @@ def p_lista_declaraciones(p):
 def p_declaracion(p):
     """ declaracion : tipo ID ASIGNACION expresion PUNTOCOMA """
     p[0] = ('declaracion', p[1], p[2], p[4])
+
+def p_declaracion_error(p):
+    """ declaracion : tipo ID ASIGNACION PUNTOCOMA """
+    errores_Sinc_Desc.append(f"Falta el valor de la expresion en la declaracion de la variable en la linea {p.lineno(1)}")
 
 def p_declaracion_error1(p):
     """ declaracion : tipo ID ASIGNACION expresion """
@@ -227,7 +239,7 @@ def tree_to_graphviz(tree, graph_str=None, parent_id=None, node_counter=[0]):
             child_id, graph_str = tree_to_graphviz(child, graph_str, current_id, node_counter)
             graph_str += f'    {current_id} -> {child_id};\n'
     elif isinstance(tree, list):
-        graph_str += f'    {current_id} [label="list"];\n'
+        graph_str += f'    {current_id} [label="lista"];\n'
         for item in tree:
             child_id, graph_str = tree_to_graphviz(item, graph_str, current_id, node_counter)
             graph_str += f'    {current_id} -> {child_id};\n'
