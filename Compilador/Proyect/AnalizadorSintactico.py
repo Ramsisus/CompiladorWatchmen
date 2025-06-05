@@ -258,19 +258,7 @@ def test_parser(codigo):
     print(errores_Sinc_Desc)
 
 # Código de prueba
-codigo = """
-BEGIN {
-    MOVE_TO(10, 20);
-    WAIT_MOTION();
-    START_RECORD();
-    LIGHT_ON;
-    ALARM_ON;
-    STOP;
-    STOP_RECORD();
-    LIGHT_OFF;
-    ALARM_OFF;
-} END
-"""
+codigo = ""
 test_parser(codigo)
 print(errores_Sinc_Desc)
-arbol(codigo)
+#arbol(codigo)
