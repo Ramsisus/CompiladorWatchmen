@@ -61,7 +61,7 @@ def p_declaracion(p):
 def p_declaracion_error(p):
     """ declaracion : tipo ID ASIGNACION PUNTOCOMA """
     errores_Sinc_Desc.append(f"Falta el valor de la expresion en la declaracion de la variable en la linea {p.lineno(1)}")
-
+#OSCAR
 def p_declaracion_error1(p):
     """ declaracion : tipo ID ASIGNACION expresion """
     errores_Sinc_Desc.append(f"Error: falta punto y coma en la línea: {p.lineno(2)}")
@@ -117,6 +117,10 @@ def p_mientras(p):
     """ mientras : WHILE PARENTESIS_A expresion PARENTESIS_B bloque_codigo """
     p[0] = ('WHILE', p[3], p[5])
 
+def p_mientras_error(p):
+    """ mientras : WHILE expresion  bloque_codigo """
+    errores_Sinc_Desc.append(f"Error: faltan parentesis de cierre en el comando WHILE en la línea {p.lineno(1)}")
+   
 def p_for_loop(p):
     """
     for_loop : FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo
@@ -168,12 +172,39 @@ def p_comando_espera_error(p):
     """ declaracion : WAIT_MOTION PUNTOCOMA """
     errores_Sinc_Desc.append(f"Faltan los parentesis en WAIT_MOTION en la linea {p.lineno(1)}")
 
+def p_comando_espera_error2(p):
+    """ declaracion : WAIT_MOTION PARENTESIS_A PARENTESIS_B """
+    errores_Sinc_Desc.append(f"Falta ; en el comando WAIT_MOTION linea: {p.lineno(1)}")
+
 def p_comando_grabacion(p):
     """
     declaracion : START_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
                         | STOP_RECORD PARENTESIS_A PARENTESIS_B PUNTOCOMA
     """
     p[0] = (p[1],)
+#OSCAR
+def p_comando_grabacion_error(p):
+    """
+    declaracion : START_RECORD PARENTESIS_A PARENTESIS_B
+                        | STOP_RECORD PARENTESIS_A PARENTESIS_B 
+    """
+    errores_Sinc_Desc.append(f"Falta ; en el comando START_RECORD linea: {p.lineno(1)}")
+#OSCAR 3 casos de error parentesis
+def p_comando_grabacion_error2(p):
+    """
+    declaracion : START_RECORD PUNTOCOMA
+                | STOP_RECORD PUNTOCOMA
+                | START_RECORD PARENTESIS_A PUNTOCOMA
+                | START_RECORD PARENTESIS_B PUNTOCOMA
+                | STOP_RECORD PARENTESIS_A PUNTOCOMA
+                | STOP_RECORD PARENTESIS_B PUNTOCOMA
+    """
+    if len(p) == 3:
+        errores_Sinc_Desc.append(f"Faltan ambos paréntesis en el comando {p[1]} en la línea {p.lineno(1)}")
+    elif p[2] == '(':
+        errores_Sinc_Desc.append(f"Falta paréntesis derecho en el comando {p[1]} en la línea {p.lineno(1)}")
+    elif p[2] == ')':
+        errores_Sinc_Desc.append(f"Falta paréntesis izquierdo en el comando {p[1]} en la línea {p.lineno(1)}")
 
 def p_comando_luz(p):
     """
@@ -181,6 +212,13 @@ def p_comando_luz(p):
                         | LIGHT_OFF PUNTOCOMA
     """
     p[0] = (p[1],)
+#oscar encendido y apagado de luz punto y coma
+def p_comando_luz_error(p):
+    """
+    declaracion : LIGHT_ON
+                | LIGHT_OFF
+    """
+    errores_Sinc_Desc.append(f"Falta punto y coma en el comando {p[1]}, línea {p.lineno(1)}")
 
 def p_comando_alarma(p):
     """
@@ -188,6 +226,21 @@ def p_comando_alarma(p):
                         | ALARM_OFF PUNTOCOMA
     """
     p[0] = (p[1],)
+#oscar encendido y apagado de alarma punto y coma
+def p_comando_alarma_error(p):
+    """
+    declaracion : ALARM_ON
+                | ALARM_OFF
+    """
+    errores_Sinc_Desc.append(f"Falta punto y coma en el comando {p[1]}, línea {p.lineno(1)}")
+#oscar sensor pir 
+def p_comando_sensorpir(p):
+    """ declaracion : SENSOR_PIR PUNTOCOMA """
+    p[0] = ('SENSOR_PIR',)
+#oscar sensor pir punto y coma 
+def p_comando_sensorpir_error(p):
+    """ declaracion : SENSOR_PIR """
+    errores_Sinc_Desc.append(f"Falta punto y coma en el comando SENSOR_PIR, línea {p.lineno(1)}")
 
 def p_comando_stop(p):
     """ declaracion : STOP PUNTOCOMA """
@@ -250,17 +303,22 @@ def tree_to_graphviz(tree, graph_str=None, parent_id=None, node_counter=[0]):
     return (current_id, graph_str) if parent_id is not None else graph_str
 
 # Función de prueba
+#OSCAR
 def test_parser(codigo):
-    result = parser.parse(codigo)
+    lexer.lineno = 1  # Reinicia el número de línea antes de analizar
+    result = parser.parse(codigo, lexer=lexer)
     print("Resultado del análisis sintáctico:")
     print(result)
     print("Errores sintácticos:")
     print(errores_Sinc_Desc)
+    return result  # <-- agrega esto si quieres usar el resultado fuera
+
 
 # Código de prueba
 codigo = """
 BEGIN {
     MOVE_TO(10, 20);
+    WAIT_MOTION();
     WAIT_MOTION();
     START_RECORD();
     LIGHT_ON;
@@ -269,8 +327,9 @@ BEGIN {
     STOP_RECORD();
     LIGHT_OFF;
     ALARM_OFF;
+    SENSOR_PIR;
 } END
 """
-test_parser(codigo)
-print(errores_Sinc_Desc)
-arbol(codigo)
+# test_parser(codigo)
+# print(errores_Sinc_Desc)
+# arbol(codigo)
