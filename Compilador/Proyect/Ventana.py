@@ -126,7 +126,7 @@ class Compilador(Tk):
         self.btn_compilar.pack(side="left", padx=5)
         self.btn_tokens = ttk.Button(self.buttons_compiler_panel, text="Tokens", command=self.Tokens)
         self.btn_tokens.pack(side="left", padx=5)
-        self.btn_Arbol = ttk.Button(self.buttons_compiler_panel, text="Arbol", command=self.Tokens)
+        self.btn_Arbol = ttk.Button(self.buttons_compiler_panel, text="Arbol", command=self.arbol)
         self.btn_Arbol.pack(side="left", padx=5)
 
         # Consola de salida
@@ -230,6 +230,14 @@ class Compilador(Tk):
         self.line_numbers_text.config(height=1, width=2)
         self.output_console.config(height=0.1, width=1)
 
+    def arbol(self):
+        # Importar el módulo necesario para generar el árbol
+        from AnalizadorSintactico import arbol
+        # Llamar a la función que genera el árbol sintáctico
+        arbol(codigo=self.text_editor.get(1.0, "end-1c"))
+        # Mostrar un mensaje de éxito
+        messagebox.showinfo("Árbol Sintáctico", "El árbol sintáctico ha sido generado y guardado.")
+
     def Tokens(self):
         app2 = VentanaTokens()
         app2.mainloop()
@@ -316,6 +324,8 @@ class Compilador(Tk):
         errores_Sinc_Desc = AS.errores_Sinc_Desc
         for error in errores_Sinc_Desc:
             self.output_console.insert(END, error + "\n")
+
+        messagebox.showinfo("Compilador", "Hecho.")
 
         # # Mostrar los errores Semanticos en la consola de salida
         # errores_Sem_Desc = AS.errores_Sem_Desc
