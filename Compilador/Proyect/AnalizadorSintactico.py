@@ -73,6 +73,10 @@ def p_tipo(p):
              | REAL """
     p[0] = p[1]
 
+def p_expresion_id(p):
+    """ expresion : ID """
+    p[0] = ('id', p[1])
+
 # Expresiones aritméticas y comparativas
 def p_expresion_binaria(p):
     '''
@@ -153,7 +157,7 @@ def p_for_actualizacion(p):
         p[0] = ('update', f"{p[1]} {p[2]}")
 
 # Comandos del lenguaje del robot
-
+#INICIO COMANDO MOVE_TO
 def p_comando_movimiento(p):
     """ declaracion : MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA """
     p[0] = ('MOVE_TO', (p[3], p[5]))
@@ -163,6 +167,39 @@ def p_comando_movimiento_error(p):
                     | MOVE_TO PARENTESIS_A COMA NUMERO PARENTESIS_B PUNTOCOMA  
     """
     errores_Sinc_Desc.append(f"Falta un parametro en la instruccion MOVE_TO en la linea {p.lineno(1)}")
+
+def p_comando_movimiento_error2(p):
+    """ declaracion : MOVE_TO PARENTESIS_A NUMERO NUMERO PARENTESIS_B PUNTOCOMA
+    """
+    errores_Sinc_Desc.append(f"Falta , dentro de los parametros MOVE_TO en la linea {p.lineno(1)}")
+
+def p_comando_movimiento_error3(p):
+    """ declaracion : MOVE_TO PARENTESIS_A NUMERO COMA NUMERO PARENTESIS_B
+    """
+    errores_Sinc_Desc.append(f"Falta ; al final del comando {p.lineno(1)}")
+
+def p_comando_movimiento_error4(p):
+    """ declaracion : MOVE_TO PARENTESIS_A PARENTESIS_B PUNTOCOMA
+    """
+    errores_Sinc_Desc.append(f"Faltan parametros dentro del comando {p.lineno(1)}")
+
+def p_comando_movimiento_error5(p):
+    """ declaracion : MOVE_TO PARENTESIS_A NUMERO PARENTESIS_B PUNTOCOMA
+    """
+    errores_Sinc_Desc.append(f"Faltan , y otro parametro dentro del comando en la linea: {p.lineno(1)}")
+
+def p_comando_movimiento_error6(p):
+    """ declaracion : MOVE_TO  NUMERO COMA NUMERO PARENTESIS_B PUNTOCOMA """
+    errores_Sinc_Desc.append(f"Falta abrir el parentesis izquierdo ( en la linea: {p.lineno(1)}")
+
+def p_comando_movimiento_error7(p):
+    """ declaracion : MOVE_TO PARENTESIS_A NUMERO COMA NUMERO  PUNTOCOMA """
+    errores_Sinc_Desc.append(f"Falta cerrar el parentesis derecho ) en la linea: {p.lineno(1)}")
+
+def p_comando_movimiento_error8(p):
+    """ declaracion : MOVE_TO  NUMERO COMA NUMERO  PUNTOCOMA """
+    errores_Sinc_Desc.append(f"Faltan parentesis en el comando MOVE_TO en la linea: {p.lineno(1)}")
+#fin errores del COMANDO MOVE_TO
 
 def p_comando_espera(p):
     """ declaracion : WAIT_MOTION PARENTESIS_A PARENTESIS_B PUNTOCOMA """
@@ -302,6 +339,59 @@ def tree_to_graphviz(tree, graph_str=None, parent_id=None, node_counter=[0]):
     
     return (current_id, graph_str) if parent_id is not None else graph_str
 
+def p_programa_error_begin(p):
+    """ programa : bloque_codigo END """
+    errores_Sinc_Desc.append(f"Falta la etiqueta BEGIN al inicio del programa")
+
+def p_si_error_parentesis(p):
+    """ si : IF expresion PARENTESIS_B bloque_codigo """
+    errores_Sinc_Desc.append(f"Falta paréntesis de apertura en sentencia IF en la línea {p.lineno(1)}")
+
+def p_mientras_error_parentesis(p):
+    """ mientras : WHILE expresion PARENTESIS_B bloque_codigo """
+    errores_Sinc_Desc.append(f"Falta paréntesis de apertura en sentencia WHILE en la línea {p.lineno(1)}")
+
+def p_for_loop_error_parentesis(p):
+    """ for_loop : FOR for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B bloque_codigo """
+    errores_Sinc_Desc.append(f"Falta paréntesis de apertura en sentencia FOR en la línea {p.lineno(1)}")
+
+def p_comando_grabacion_error(p):
+    """ declaracion : START_RECORD PARENTESIS_A PARENTESIS_B
+                    | STOP_RECORD PARENTESIS_A PARENTESIS_B """
+    errores_Sinc_Desc.append(f"Falta punto y coma al final de la instrucción {p[1]} en la línea {p.lineno(1)}")
+
+def p_comando_grabacion_error(p):
+    """ declaracion : START_RECORD PARENTESIS_A PARENTESIS_B
+                    | STOP_RECORD PARENTESIS_A PARENTESIS_B """
+    errores_Sinc_Desc.append(f"Falta punto y coma al final de la instrucción {p[1]} en la línea {p.lineno(1)}")
+
+def p_comando_luz_error(p):
+    """ declaracion : LIGHT_ON
+                    | LIGHT_OFF """
+    errores_Sinc_Desc.append(f"Falta punto y coma en la instrucción {p[1]} en la línea {p.lineno(1)}")
+
+def p_si_error_sin_llave(p):
+    """ si : IF PARENTESIS_A expresion PARENTESIS_B expresion """
+    errores_Sinc_Desc.append(f"Falta bloque con llaves {{}} después del IF en la línea {p.lineno(1)}")
+
+def p_mientras_error_sin_llave(p):
+    """ mientras : WHILE PARENTESIS_A expresion PARENTESIS_B expresion """
+    errores_Sinc_Desc.append(f"Falta bloque con llaves {{}} después del WHILE en la línea {p.lineno(1)}")
+
+def p_for_loop_error_sin_llave(p):
+    """ for_loop : FOR PARENTESIS_A for_init PUNTOCOMA for_condicion PUNTOCOMA for_actualizacion PARENTESIS_B expresion """
+    errores_Sinc_Desc.append(f"Falta bloque con llaves {{}} después del FOR en la línea {p.lineno(1)}")
+
+def p_declaracion_tipo_error(p):
+    """ declaracion : tipo ID ASIGNACION CADENA PUNTOCOMA """
+    # Si tipo es INT o REAL y asignas cadena, marcar error
+    if p[1] in ['INT', 'REAL']:
+        errores_Sinc_Desc.append(f"Error de tipo: no se puede asignar cadena a variable {p[2]} de tipo {p[1]} en la línea {p.lineno(2)}")
+
+def p_declaracion_vacia(p):
+    """ declaracion : PUNTOCOMA """
+    errores_Sinc_Desc.append(f"Sentencia vacía detectada en la línea {p.lineno(1)}")
+    
 # Función de prueba
 #OSCAR
 def test_parser(codigo):
@@ -312,7 +402,6 @@ def test_parser(codigo):
     print("Errores sintácticos:")
     print(errores_Sinc_Desc)
     return result  # <-- agrega esto si quieres usar el resultado fuera
-
 
 # Código de prueba
 codigo = """

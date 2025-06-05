@@ -137,26 +137,25 @@ def t_error(t):
     t.lexer.skip(1)
 
 # Método para manejar identificadores no válidos OSCAR 
-def t_IDError(t):
-    r'\d+[a-zA-ZñÑ][a-zA-Z0-9ñÑ]*'
-    global errores_Desc
-    columna = t.lexpos - t.lexer.lexdata.rfind('\n', 0, t.lexpos)
-    errores_Desc.append("Identificador NO válido en la línea " + str(t.lineno) + ", en columna " + str(columna))
+# def t_IDError(t):
+#     r'\d+[a-zA-ZñÑ][a-zA-Z0-9ñÑ]*'
+#     global errores_Desc
+#     columna = t.lexpos - t.lexer.lexdata.rfind('\n', 0, t.lexpos)
+#     errores_Desc.append("Identificador NO válido en la línea " + str(t.lineno) + ", en columna " + str(columna))
 
 # Método para identificar identificadores OSCAR
-def t_IDENTIFICADOR(t): 
-    r'[a-zA-Z][a-zA-Z0-9_]*'  # Expresión regular para identificadores válidos
-    valor = t.value.lower()  # Convertir el valor del identificador a minúsculas
-    if valor in reservadas:  # Verificar si el identificador es una palabra reservada
-        t.type = valor.upper()  # Asignar el tipo del token a la palabra reservada
-    else: 
-        if any(palabra.startswith(valor) for palabra in reservadas):  # Verificar errores en palabras reservadas mal escritas
-            global errores_Desc
-            columna = t.lexpos - t.lexer.lexdata.rfind('\n', 0, t.lexpos)  # Calcular la columna donde se encuentra el error
-            errores_Desc.append(f"Error léxico: palabra reservada mal escrita '{t.value}' en la línea {t.lineno}, en columna {columna}") 
-        t.type = 'ID'  # Asignar el tipo ID si no es una palabra reservada
-    return t
-
+# def t_IDENTIFICADOR(t): 
+#     r'[a-zA-Z][a-zA-Z0-9_]*'  # Expresión regular para identificadores válidos
+#     valor = t.value.lower()  # Convertir el valor del identificador a minúsculas
+#     if valor in reservadas:  # Verificar si el identificador es una palabra reservada
+#         t.type = valor.upper()  # Asignar el tipo del token a la palabra reservada
+#     else: 
+#         if any(palabra.startswith(valor) for palabra in reservadas):  # Verificar errores en palabras reservadas mal escritas
+#             global errores_Desc
+#             columna = t.lexpos - t.lexer.lexdata.rfind('\n', 0, t.lexpos)  # Calcular la columna donde se encuentra el error
+#             errores_Desc.append(f"Error léxico: palabra reservada mal escrita '{t.value}' en la línea {t.lineno}, en columna {columna}") 
+#         t.type = 'ID'  # Asignar el tipo ID si no es una palabra reservada
+#     return t
 
 # Construir el analizador léxico
 lexer = lex.lex()
