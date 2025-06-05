@@ -22,6 +22,10 @@ precedence = (
 )
 
 # gramática inicial
+def p_programa_error_begin(p):
+    """ programa : bloque_codigo END """
+    errores_Sinc_Desc.append(f"Falta la etiqueta BEGIN al inicio del programa")
+
 def p_programa(p):
     """ programa : BEGIN bloque_codigo END """
     p[0] = ('programa', p[2])
@@ -288,10 +292,12 @@ def p_error_comando_stop(p):
     errores_Sinc_Desc.append(f"Falta punto y coma en la sentencia STOP, linea {p.lineno(1)}")
 
 def p_error(p):
+    if errores_Sinc_Desc:
+        return  # Ya hay un error, no agregues más
     if p:
-        errores_Sinc_Desc.append(f"Error de sintaxis en la línea {p.lineno} cerca de '{p.value}'")
+        errores_Sinc_Desc.append(f"Error de sintaxis en la línea {p.lineno}")
     else:
-        errores_Sinc_Desc.append("Error de sintaxis inesperado: fin de archivo")
+        errores_Sinc_Desc.append("Error no hay nada escrito en el compilador")
 
 # Construir analizador
 parser = yacc.yacc()
@@ -338,10 +344,6 @@ def tree_to_graphviz(tree, graph_str=None, parent_id=None, node_counter=[0]):
         graph_str += "}"
     
     return (current_id, graph_str) if parent_id is not None else graph_str
-
-def p_programa_error_begin(p):
-    """ programa : bloque_codigo END """
-    errores_Sinc_Desc.append(f"Falta la etiqueta BEGIN al inicio del programa")
 
 def p_si_error_parentesis(p):
     """ si : IF expresion PARENTESIS_B bloque_codigo """
